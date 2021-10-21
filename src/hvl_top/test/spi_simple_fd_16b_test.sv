@@ -14,8 +14,8 @@ class spi_simple_fd_16b_test extends base_test;
   //-------------------------------------------------------
   // Declaring sequence handles  
   //-------------------------------------------------------
-  m_spi_fd_16b_seq m_spi_fd_16b_h;
-  s_spi_fd_16b_seq s_spi_fd_16b_h;
+  // MSHA:m_spi_fd_16b_seq m_spi_fd_16b_h;
+  // MSHA:s_spi_fd_16b_seq s_spi_fd_16b_h;
 
 
   //-------------------------------------------------------
@@ -42,7 +42,7 @@ endfunction : new
 //--------------------------------------------------------------------------------------------
 // Function:build_phase
 //--------------------------------------------------------------------------------------------
-function void build_phase(uvm_phase phase);
+function void spi_simple_fd_16b_test::build_phase(uvm_phase phase);
   super.build_phase(phase);
 endfunction : build_phase
 
@@ -50,15 +50,17 @@ endfunction : build_phase
 // Task:run_phase
 // Responsible for starting the transactions
 //--------------------------------------------------------------------------------------------
-task run_phase(uvm_phase phase);
-  m_spi_fd_16b_h = m_spi_fd_16b_seq::type_id::create("m_spi_fd_16b_h");
-  s_spi_fd_16b_h = s_spi_fd_16b_seq::type_id::create("s_spi_fd_16b_h");
+task spi_simple_fd_16b_test::run_phase(uvm_phase phase);
+
+
+  // MSHA:m_spi_fd_16b_h = m_spi_fd_16b_seq::type_id::create("m_spi_fd_16b_h");
+  // MSHA:s_spi_fd_16b_h = s_spi_fd_16b_seq::type_id::create("s_spi_fd_16b_h");
 
   phase.raise_objection(this);
-  fork
-      m_spi_fd_16b_h.start(env_h.v_sqr_h);
-      s_spi_fd_16b_h.start(env_h.v_sqr_h);
-  join
+  // MSHA:fork
+  // MSHA:    m_spi_fd_16b_h.start(env_h.v_sqr_h);
+  // MSHA:    s_spi_fd_16b_h.start(env_h.v_sqr_h);
+  // MSHA:join
   phase.drop_objection(this);
 
 endtask:run_phase

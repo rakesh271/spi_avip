@@ -19,13 +19,13 @@ class env extends uvm_env;
 // declaring master handles
 //-------------------------------------------------------
       master_agent ma_h;
-      master_virtual_sequencer m_v_sqr_h;
-  
+ 
+      virtual_sequencer vseqr;
+
 //-------------------------------------------------------
 // Declaring slave handles
 //-------------------------------------------------------
       slave_agent sa_h;
-      slave_virtual_sequencer s_v_sqr_h;
 
 //-------------------------------------------------------
 // Externally defined Tasks and Functions
@@ -60,9 +60,10 @@ endclass : env
 
     `uvm_info(get_full_name(),"ENV: build_phase",UVM_LOW);
 
-      ma_h=master_agent::type_id::create("master_agent",this);
-      m_v_sqr_h = master_virtual_sequencer::type_id::create("master_virtual_sequencer",this);
-      s_v_sqr_h = slave_virtual_sequencer::type_id::create("slave_virtual_sequencer",this);
+      vseqr = virtual_sequencer::type_id::create("vseqr", this);
+
+      ma_h = master_agent::type_id::create("master_agent",this);
+      // TODO(mshariff): Create the agents based on the number of slaves
       sa_h = slave_agent::type_id::create("slave_agent",this);
 
   endfunction : build_phase
@@ -77,6 +78,9 @@ endclass : env
 //--------------------------------------------------------------------------------------------
   function void env::connect_phase(uvm_phase phase);
    super.connect_phase(phase);
+
+   vseqr.m_seqr_h = ma_h.m_sqr_h;
+   vseqr.s_seqr_h = sa_h.s_sqr_h;
   endfunction : connect_phase
 
 `endif

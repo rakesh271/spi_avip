@@ -53,13 +53,14 @@ task vseq1_fd_16b_seq::body();
     //configuring no of masters and starting master sequencers
 
     fork  
+      // TODO(mshariff): Have begin-end for fork join and labels
       //has_m_agt should be declared in env_config file
       if(e_cfg_h.has_m_agt)begin
 
       //no_of_magent should be declared in env_config file
       for(int i=0; i<e_cfg_h.no_of_magent; i++)begin
       //starting master sequencer
-      m_spi_fd_16b_h.start(m_seqr_h)
+      m_spi_fd_16b_h.start(m_seqr_h);
       end
     end
 
@@ -68,7 +69,7 @@ task vseq1_fd_16b_seq::body();
     //no_of_sagent should be declared in env_config file
      for(int i=0; i<e_cfg_h.no_of_sagent; i++)begin
     //starting slave sequencer
-     s_spi_fd_16b_h.start(s_seqr_h)
+     s_spi_fd_16b_h.start(s_seqr_h);
      end
     end
   join

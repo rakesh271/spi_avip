@@ -51,26 +51,29 @@ task vseq1_fd_8b_seq::body();
 
    //configuring no of masters and starting master sequencers
 
-fork  
-    //has_m_agt should be declared in env_config file
-      if(e_cfg_h.has_m_agt)begin
-
-    //no_of_magent should be declared in env_config file
-      for(int i=0; i<e_cfg_h.no_of_magent; i++)begin
-      //starting master sequencer
-      m_spi_fd_8b_h.start(m_seqr_h)
-    end
-  end
-
-    //has_s_agt should be declared in env_config file
-    if(e_cfg_h.has_s_agt) begin 
-    //no_of_sagent should be declared in env_config file
-    for(int i=0; i<e_cfg_h.no_of_sagent; i++)begin
-    //starting slave sequencer
-      s_spi_fd_8b_h.start(s_seqr_h)
+  fork 
+    begin : MASTER_SEQ_START
+      //has_m_agt should be declared in env_config file
+      if(e_cfg_h.has_m_agt) begin
+        //no_of_magent should be declared in env_config file
+        for(int i=0; i<e_cfg_h.no_of_magent; i++) begin
+          //starting master sequencer
+          m_spi_fd_8b_h.start(m_seqr_h);
+        end
       end
-  end
-join
+    end
+
+    begin : SLAVE_SEQ_START
+      //has_s_agt should be declared in env_config file
+      if(e_cfg_h.has_s_agt) begin 
+        //no_of_sagent should be declared in env_config file
+        for(int i=0; i<e_cfg_h.no_of_sagent; i++) begin
+          //starting slave sequencer
+          s_spi_fd_8b_h.start(s_seqr_h);
+        end
+      end
+    end
+  join
 
 endtask: body
 
