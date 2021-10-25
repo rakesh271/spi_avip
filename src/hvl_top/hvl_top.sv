@@ -14,6 +14,8 @@ module hvl_top;
   //-------------------------------------------------------
   spi_if vif();
   slave_monitor_bfm s_mon_bfm_h(vif.MON_MP);
+  master_monitor_bfm m_mon_bfm_h(vif.MON_MP);
+
   //-------------------------------------------------------
   // run_test for simulation
   //-------------------------------------------------------

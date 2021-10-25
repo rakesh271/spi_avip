@@ -46,6 +46,7 @@ module hdl_top;
   //-------------------------------------------------------
   // SPI BFM Agent Instantiation
   //-------------------------------------------------------
+  master_agent_bfm master_agent_bfm_h(intf);
   slave_agent_bfm slave_agent_bfm_h(intf);
 
 endmodule : hdl_top
