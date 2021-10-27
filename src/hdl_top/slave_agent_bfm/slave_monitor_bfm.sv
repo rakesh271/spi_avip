@@ -5,10 +5,7 @@
 //--------------------------------------------------------------------------------------------
  
 interface slave_monitor_bfm (input sclk,cs,mosi0,mosi1,mosi2,mosi3,miso0,miso1,miso2,miso3);
-  //variable DATA_WIDTH
-  //DATA_WIDTH of data_mosi and data_miso
-  parameter  DATA_WIDTH=8;
-  
+  import spi_globals_pkg::DATA_WIDTH;  
   //-------------------------------------------------------
   // Creating the handle for proxy driver
   //-------------------------------------------------------
