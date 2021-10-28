@@ -9,6 +9,11 @@
 module hdl_top;
 
   //-------------------------------------------------------
+  // Importing SLAVE_DRIVER_ACTIVE from spi_globals_pkg
+  //-------------------------------------------------------
+  import spi_globals_pkg::SLAVE_DRIVER_ACTIVE;
+
+  //-------------------------------------------------------
   // Clock Reset Initialization
   //-------------------------------------------------------
   bit clk;
@@ -46,7 +51,7 @@ module hdl_top;
   //-------------------------------------------------------
   // SPI BFM Agent Instantiation
   //-------------------------------------------------------
-  slave_agent_bfm slave_agent_bfm_h(intf);
+  slave_agent_bfm#(SLAVE_DRIVER_ACTIVE) slave_agent_bfm_h(intf);
 
 endmodule : hdl_top
 
